@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7UH-iD-HM5">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Tab Bar Controller-->
+        <scene sceneID="IOa-zF-oC5">
+            <objects>
+                <tabBarController id="7UH-iD-HM5" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="7Oe-Gi-tSB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="ZtS-63-YAt" kind="relationship" relationship="viewControllers" id="ryJ-9I-CHP"/>
+                        <segue destination="Tl7-ha-dJs" kind="relationship" relationship="viewControllers" id="2vg-Xe-ct0"/>
+                        <segue destination="bup-px-mTG" kind="relationship" relationship="viewControllers" id="ju8-k5-hCo"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YoM-N0-r2C" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-874" y="-176"/>
+        </scene>
+        <!--Collection View-->
+        <scene sceneID="ByV-RD-1xZ">
+            <objects>
+                <collectionViewController id="Tl7-ha-dJs" customClass="CustomCollectionViewController" customModule="Template" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="ZKu-pK-oGP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1ny-V2-ffv">
+                            <size key="itemSize" width="118" height="118"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CustomCollectionViewCell" id="dfU-oC-Gzx" customClass="CustomCollectionViewCell" customModule="Template" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="118" height="118"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="118" height="118"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="rap-battle" translatesAutoresizingMaskIntoConstraints="NO" id="XHr-hx-hie">
+                                            <rect key="frame" x="8" y="8" width="101" height="101"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                    </subviews>
+                                </view>
+                                <connections>
+                                    <outlet property="photoImageView" destination="XHr-hx-hie" id="p6V-ZN-3jh"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="Tl7-ha-dJs" id="cc4-dN-Kef"/>
+                            <outlet property="delegate" destination="Tl7-ha-dJs" id="rF5-cJ-JFo"/>
+                        </connections>
+                    </collectionView>
+                    <tabBarItem key="tabBarItem" title="Collection View" image="ProfileIcon" id="d5X-zo-oYM"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HF4-BG-HIo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1911.2" y="587.85607196401804"/>
+        </scene>
+        <!--Table View-->
+        <scene sceneID="QMg-Hx-oNp">
+            <objects>
+                <tableViewController id="ZtS-63-YAt" customClass="CustomTableViewController" customModule="Template" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="129" sectionHeaderHeight="28" sectionFooterHeight="28" id="pPF-R9-wCg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CustomTableViewCell" rowHeight="129" id="pCm-ny-1YB" customClass="CustomTableViewCell" customModule="Template" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="129"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pCm-ny-1YB" id="KQK-Rx-DRq">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="128"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dxl-wy-STy">
+                                            <rect key="frame" x="8" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ZtS-63-YAt" id="zz0-QQ-b5J"/>
+                            <outlet property="delegate" destination="ZtS-63-YAt" id="T7J-dN-Ex2"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Table View" image="HomeIcon" id="5Qg-T5-kaM"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gZJ-t8-hE8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-874.39999999999998" y="587.85607196401804"/>
+        </scene>
+        <!--Map View-->
+        <scene sceneID="zyU-p4-qck">
+            <objects>
+                <viewController id="bup-px-mTG" customClass="CustomMapViewController" customModule="Template" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1Eq-Yh-FyA"/>
+                        <viewControllerLayoutGuide type="bottom" id="MOf-q9-vgb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ONT-O7-hd6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="hjO-hP-0aZ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MJE-CZ-OVQ">
+                                <rect key="frame" x="280" y="533" width="60" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="MyLocationIcon"/>
+                                <connections>
+                                    <action selector="onCurrentLocationButtonTapped:" destination="bup-px-mTG" eventType="touchUpInside" id="Nr6-s7-Nas"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Map View" image="MapIcon" id="4Fg-dR-myy"/>
+                    <connections>
+                        <outlet property="currentLocationButton" destination="MJE-CZ-OVQ" id="DIm-rj-NK8"/>
+                        <outlet property="mapView" destination="hjO-hP-0aZ" id="zaT-sx-T8X"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B58-Ds-mEP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="159" y="588"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="HomeIcon" width="50" height="50"/>
+        <image name="MapIcon" width="50" height="50"/>
+        <image name="MyLocationIcon" width="60" height="60"/>
+        <image name="ProfileIcon" width="50" height="50"/>
+        <image name="rap-battle" width="600" height="600"/>
+    </resources>
+</document>

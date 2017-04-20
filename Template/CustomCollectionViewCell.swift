@@ -2,7 +2,7 @@
 //  CustomCollectionViewCell.swift
 //  Template
 //
-//  Created by Mateo Garcia on 4/4/17.
+//  Created by Herb on 4/4/17.
 //  Copyright © 2017 StreetCode. All rights reserved.
 //
 

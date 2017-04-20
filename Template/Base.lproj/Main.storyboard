@@ -85,13 +85,25 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="129"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pCm-ny-1YB" id="KQK-Rx-DRq">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="128"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="129"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dxl-wy-STy">
                                             <rect key="frame" x="8" y="0.0" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Drake" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IPW-Fb-tUC">
+                                            <rect key="frame" x="66" y="15" width="45" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CbY-Xg-HcC">
+                                            <rect key="frame" x="73" y="73" width="30" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Button" image="mic"/>
+                                        </button>
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -105,7 +117,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gZJ-t8-hE8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-874.39999999999998" y="587.85607196401804"/>
+            <point key="canvasLocation" x="-853.60000000000002" y="613.94302848575717"/>
         </scene>
         <!--Map View-->
         <scene sceneID="zyU-p4-qck">
@@ -150,6 +162,7 @@
         <image name="MapIcon" width="50" height="50"/>
         <image name="MyLocationIcon" width="60" height="60"/>
         <image name="ProfileIcon" width="50" height="50"/>
+        <image name="mic" width="240" height="240"/>
         <image name="rap-battle" width="600" height="600"/>
     </resources>
 </document>

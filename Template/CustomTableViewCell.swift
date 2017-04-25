@@ -10,11 +10,14 @@ import UIKit
 
 class CustomTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var photoImageView: UIImageView!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var areaLabel: UILabel!
-    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var profileImageView: UIImageView!
     
+    @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var micButton: UIButton!
+    
+    @IBOutlet weak var micCountLabel: UILabel!
+    @IBOutlet weak var videoImageView: UIImageView!
+    @IBOutlet weak var usernameLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

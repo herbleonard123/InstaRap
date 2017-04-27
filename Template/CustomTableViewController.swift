@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class CustomTableViewController: UITableViewController {
 
@@ -87,7 +88,16 @@ class CustomTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-    }
-    */
-
+    }*/
+     @IBAction func onSignOutButton(_ sender: UIBarButtonItem) {
+        do {
+            
+            try FIRAuth.auth()?.signOut()
+        }
+        catch let error {
+            
+            print("Unable to sign out: \(error)")
+        }
+     }
+ 
 }

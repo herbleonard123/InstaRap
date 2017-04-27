@@ -9,17 +9,17 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Tab Bar Controller-->
+        <!--Custom Tab Bar Controller-->
         <scene sceneID="IOa-zF-oC5">
             <objects>
-                <tabBarController id="7UH-iD-HM5" sceneMemberID="viewController">
+                <tabBarController id="7UH-iD-HM5" customClass="CustomTabBarController" customModule="Template" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="7Oe-Gi-tSB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="ZtS-63-YAt" kind="relationship" relationship="viewControllers" id="ryJ-9I-CHP"/>
+                        <segue destination="D9p-9r-nGp" kind="relationship" relationship="viewControllers" id="ryJ-9I-CHP"/>
                         <segue destination="Tl7-ha-dJs" kind="relationship" relationship="viewControllers" id="2vg-Xe-ct0"/>
                         <segue destination="bup-px-mTG" kind="relationship" relationship="viewControllers" id="ju8-k5-hCo"/>
                     </connections>
@@ -32,7 +32,7 @@
         <scene sceneID="ByV-RD-1xZ">
             <objects>
                 <collectionViewController id="Tl7-ha-dJs" customClass="CustomCollectionViewController" customModule="Template" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="ZKu-pK-oGP">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="ZKu-pK-oGP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -72,7 +72,7 @@
             </objects>
             <point key="canvasLocation" x="-1911.2" y="587.85607196401804"/>
         </scene>
-        <!--Table View-->
+        <!--Custom Table View Controller-->
         <scene sceneID="QMg-Hx-oNp">
             <objects>
                 <tableViewController id="ZtS-63-YAt" customClass="CustomTableViewController" customModule="Template" customModuleProvider="target" sceneMemberID="viewController">
@@ -139,11 +139,17 @@
                             <outlet property="delegate" destination="ZtS-63-YAt" id="T7J-dN-Ex2"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Table View" image="HomeIcon" id="5Qg-T5-kaM"/>
+                    <navigationItem key="navigationItem" id="ABQ-tH-QRc">
+                        <barButtonItem key="leftBarButtonItem" title="sign out" id="4rU-gh-rdG">
+                            <connections>
+                                <action selector="onSignOutButton:" destination="ZtS-63-YAt" id="SHm-gf-2lH"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gZJ-t8-hE8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-729" y="630"/>
+            <point key="canvasLocation" x="208.80000000000001" y="629.2353823088456"/>
         </scene>
         <!--Map View-->
         <scene sceneID="zyU-p4-qck">
@@ -180,7 +186,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B58-Ds-mEP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="159" y="588"/>
+            <point key="canvasLocation" x="1096.8" y="587.85607196401804"/>
+        </scene>
+        <!--Table View-->
+        <scene sceneID="3fi-7i-Lat">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="D9p-9r-nGp" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Table View" image="HomeIcon" id="5Qg-T5-kaM"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="K3k-cw-pGq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ZtS-63-YAt" kind="relationship" relationship="rootViewController" id="WwY-bo-vJd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UgW-Np-gAI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-730.39999999999998" y="629.2353823088456"/>
         </scene>
     </scenes>
     <resources>

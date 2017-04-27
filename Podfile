@@ -1,5 +1,11 @@
-platform :ios, '7.0'
+platform :ios, '8.0'
 
 target 'Template' do
-       pod 'Firebase'
+    
+    use_frameworks!
+    
+    pod 'Firebase'
+    pod 'FirebaseUI/Auth'
+    pod 'FirebaseUI/Google'
+    
 end

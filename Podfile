@@ -4,7 +4,10 @@ target 'Template' do
     
     use_frameworks!
     
-    pod 'Firebase'
+    pod 'Firebase/Core'
+    pod 'Firebase/Storage'
+    pod 'Firebase/Database'
+    pod 'Firebase/Auth'
     pod 'FirebaseUI/Auth'
     pod 'FirebaseUI/Google'
     

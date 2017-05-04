@@ -8,8 +8,10 @@
 
 import UIKit
 import Firebase
+import AVFoundation
+import MobileCoreServices
 
-class CustomTableViewController: UITableViewController {
+class CustomTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,4 +102,26 @@ class CustomTableViewController: UITableViewController {
         }
      }
  
+    @IBAction func onCameraButton(_ sender: UIBarButtonItem) {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = false
+        picker.mediaTypes = [kUTTypeMovie as String]
+        
+        let OptionMenu = UIAlertController(title: nil, message: "please choose a video source", preferredStyle: .actionSheet)
+        let cameraOption = UIAlertAction(title: "Camera", style: .default) { (alert: UIAlertAction) in
+            picker.sourceType = .camera
+            self.present(picker, animated: true, completion: nil)
+        }
+        let albumOption = UIAlertAction(title: "Photo Album", style: .default) { (alert: UIAlertAction) in
+            picker.sourceType = .photoLibrary
+            self.present(picker, animated: true, completion: nil)
+        }
+        let cancelOption = UIAlertAction(title: "Cancel", style: .cancel) { (alert: UIAlertAction) in
+        }
+        OptionMenu.addAction(cameraOption)
+        OptionMenu.addAction(albumOption)
+        OptionMenu.addAction(cancelOption)
+        present(OptionMenu, animated: true, completion: nil)
+    }
 }

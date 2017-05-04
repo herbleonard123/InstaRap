@@ -15,10 +15,10 @@
 		5D64EC301EAC04C400AD33EF /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D64EC2F1EAC04C400AD33EF /* Post.swift */; };
 		5D64EC321EAC0B2500AD33EF /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D64EC311EAC0B2500AD33EF /* user.swift */; };
 		5DD47A091E9C7BB200D34244 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5DD47A081E9C7BB200D34244 /* GoogleService-Info.plist */; };
+		5DD706C51EBACD6F001BE5A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DD706C41EBACD6F001BE5A5 /* Assets.xcassets */; };
 		5DECF5C91EB19150001E9DF9 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DECF5C81EB19150001E9DF9 /* CustomTabBarController.swift */; };
 		A56203D41E933FEA00122BDB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56203D31E933FEA00122BDB /* AppDelegate.swift */; };
 		A56203D91E933FEA00122BDB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A56203D71E933FEA00122BDB /* Main.storyboard */; };
-		A56203DB1E933FEA00122BDB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A56203DA1E933FEA00122BDB /* Assets.xcassets */; };
 		A56203DE1E933FEA00122BDB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A56203DC1E933FEA00122BDB /* LaunchScreen.storyboard */; };
 		B36DEA69EDA39442A268E957 /* Pods_Template.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 834CA70B43AD134057AC81C1 /* Pods_Template.framework */; };
 /* End PBXBuildFile section */
@@ -33,12 +33,12 @@
 		5D64EC2F1EAC04C400AD33EF /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		5D64EC311EAC0B2500AD33EF /* user.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = user.swift; path = ../user.swift; sourceTree = "<group>"; };
 		5DD47A081E9C7BB200D34244 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5DD706C41EBACD6F001BE5A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5DECF5C81EB19150001E9DF9 /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		834CA70B43AD134057AC81C1 /* Pods_Template.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Template.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A56203D01E933FEA00122BDB /* Template.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Template.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A56203D31E933FEA00122BDB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A56203D81E933FEA00122BDB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		A56203DA1E933FEA00122BDB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A56203DD1E933FEA00122BDB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A56203DF1E933FEA00122BDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C8FE0E05436F33BFA008ABF6 /* Pods-Template.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Template.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Template/Pods-Template.debug.xcconfig"; sourceTree = "<group>"; };
@@ -94,6 +94,7 @@
 		A56203D21E933FEA00122BDB /* Template */ = {
 			isa = PBXGroup;
 			children = (
+				5DD706C41EBACD6F001BE5A5 /* Assets.xcassets */,
 				5DECF5C81EB19150001E9DF9 /* CustomTabBarController.swift */,
 				A56203D31E933FEA00122BDB /* AppDelegate.swift */,
 				A56203D71E933FEA00122BDB /* Main.storyboard */,
@@ -102,7 +103,6 @@
 				256DD3D21E93A84100DC5D31 /* CustomTableViewController.swift */,
 				256DD3D01E93A82300DC5D31 /* CustomTableViewCell.swift */,
 				256DD3D61E93A97C00DC5D31 /* CustomMapViewController.swift */,
-				A56203DA1E933FEA00122BDB /* Assets.xcassets */,
 				A56203DC1E933FEA00122BDB /* LaunchScreen.storyboard */,
 				5DD47A081E9C7BB200D34244 /* GoogleService-Info.plist */,
 				A56203DF1E933FEA00122BDB /* Info.plist */,
@@ -176,7 +176,7 @@
 			files = (
 				A56203DE1E933FEA00122BDB /* LaunchScreen.storyboard in Resources */,
 				5DD47A091E9C7BB200D34244 /* GoogleService-Info.plist in Resources */,
-				A56203DB1E933FEA00122BDB /* Assets.xcassets in Resources */,
+				5DD706C51EBACD6F001BE5A5 /* Assets.xcassets in Resources */,
 				A56203D91E933FEA00122BDB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

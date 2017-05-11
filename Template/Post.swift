@@ -9,6 +9,7 @@
 import Foundation
 class Post{
     var id : String?
+    // TODO: Need to save the user ID of the author of the post here.
     var mics: Int?
     var imageurl:String?
     var videourl:String?

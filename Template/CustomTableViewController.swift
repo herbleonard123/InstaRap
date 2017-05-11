@@ -1,3 +1,4 @@
+
 //
 //  CustomTableViewController.swift
 //  Template
@@ -12,6 +13,10 @@ import AVFoundation
 import MobileCoreServices
 
 class CustomTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    var posts = [Post]()
+    var videofileurl: NSURL?
+    var thumbnailImage: UIImage?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,13 +42,17 @@ class CustomTableViewController: UITableViewController, UIImagePickerControllerD
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 10
+        return posts.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as! CustomTableViewCell
 
         // Configure the cell...
+        let post = posts[indexPath.row]
+        // TODO: This code is incomplete. Need to set up the cell based on info from the post object. Could use AlamofireImage to download the image based on the image URL.
+        //cell.videoImageView.image =
+        cell.micCountLabel.text = "\(post.mics)"
 
         return cell
     }
@@ -123,5 +132,64 @@ class CustomTableViewController: UITableViewController, UIImagePickerControllerD
         OptionMenu.addAction(albumOption)
         OptionMenu.addAction(cancelOption)
         present(OptionMenu, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let videofileurl = info[UIImagePickerControllerMediaURL] as? NSURL {
+            thumbnailImage = getThumbnailImage(forVideoFileUrl: videofileurl)
+            if let currentUserId = User.currentUser?.id {
+                let rootNode = FIRDatabase.database().reference()
+                let postNode = rootNode.child("posts").child(currentUserId).childByAutoId()
+                
+                let storageNode = FIRStorage.storage().reference()
+                let postImageNode = storageNode.child("postImages").child("\(postNode.key).png")
+                if let imageData = UIImagePNGRepresentation(thumbnailImage!) {
+                    // Save image.
+                    postImageNode.put(imageData, metadata: nil, completion: { (metadata: FIRStorageMetadata?, error: Error?) in
+                        
+                        if error == nil {
+                            let imageUrl = metadata?.downloadURL()
+                            let postVideoNode = storageNode.child("postVideos").child("\(postNode.key).mov")
+                            // Save video.
+                            postVideoNode.putFile(videofileurl as URL, metadata: nil, completion: { (metadata: FIRStorageMetadata?, error: Error?) in
+                                
+                                if error == nil {
+                                    let videoUrl = metadata?.downloadURL()
+                                    let values = [
+                                        "mics": 0 as Any,
+                                        "imageurl": imageUrl?.absoluteString ?? "" as Any,
+                                        "videourl": videoUrl?.absoluteString ?? "" as Any
+                                    ]
+                                    // Save post.
+                                    postNode.updateChildValues(values, withCompletionBlock: { (error: Error?, database: FIRDatabaseReference) in
+                                        if error == nil {
+                                            postNode.observeSingleEvent(of: .value, with: { (snapshot: FIRDataSnapshot) in
+                                                let postId = snapshot.key
+                                                let post = Post(id: postId, dictionary: snapshot.value as AnyObject)
+                                                self.posts.append(post)
+                                            })
+                                        }
+                                    })
+                                }
+                            })
+                            
+                        }
+                    })
+                }
+            }
+        }
+    }
+    
+    func getThumbnailImage(forVideoFileUrl videoFileUrl: NSURL) -> UIImage? {
+        
+        let imageGenerator = AVAssetImageGenerator(asset: AVAsset(url: videoFileUrl as URL))
+        
+        do {
+            let thumbailCGImage = try imageGenerator.copyCGImage(at: CMTimeMake(1, 60), actualTime: nil)
+            return UIImage(cgImage: thumbailCGImage)
+        }
+        catch {
+            return UIImage()
+        }
     }
 }

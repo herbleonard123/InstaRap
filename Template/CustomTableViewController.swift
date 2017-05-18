@@ -15,12 +15,20 @@ import MobileCoreServices
 class CustomTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var posts = [Post]()
+    var users = [User]()
     var videofileurl: NSURL?
     var thumbnailImage: UIImage?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        var user1 = User(id: "123", dictionary: ["name": "Drake", "email": "drake@gmail.com", "imageurl": "drake.jpeg"] as AnyObject)
+        users.append(user1)
+        var post = Post(id: "123", dictionary: ["mics": 2, "imageurl": "drake.jpeg", "videourl": "drake_video.jpeg"] as AnyObject)
+        posts.append(post)
+        var user2 = User(id: "1234", dictionary: ["name": "Willow", "email": "willow@gmail.com", "imageurl": "imwillowsmith.jpeg"] as AnyObject)
+        users.append(user2)
+        var post2 = Post(id: "1234", dictionary: ["mics": 4, "imageurl": "imwillowsmith.jpeg", "videourl": "Willow_Smith.jpeg"] as AnyObject)
+        posts.append(post2)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -51,8 +59,17 @@ class CustomTableViewController: UITableViewController, UIImagePickerControllerD
         // Configure the cell...
         let post = posts[indexPath.row]
         // TODO: This code is incomplete. Need to set up the cell based on info from the post object. Could use AlamofireImage to download the image based on the image URL.
-        //cell.videoImageView.image =
-        cell.micCountLabel.text = "\(post.mics)"
+        cell.profileImageView.image = UIImage(named: post.imageurl!)
+        cell.videoImageView.image = UIImage(named: post.videourl!)
+        var username = ""
+        for user in users {
+            if user.id == post.id {
+                username = user.name!
+            }
+        }
+        cell.usernameLabel.text = username
+        cell.usernameLabel.adjustsFontSizeToFitWidth = true
+        cell.micCountLabel.text = "\(post.mics!)"
 
         return cell
     }
@@ -119,8 +136,13 @@ class CustomTableViewController: UITableViewController, UIImagePickerControllerD
         
         let OptionMenu = UIAlertController(title: nil, message: "please choose a video source", preferredStyle: .actionSheet)
         let cameraOption = UIAlertAction(title: "Camera", style: .default) { (alert: UIAlertAction) in
-            picker.sourceType = .camera
-            self.present(picker, animated: true, completion: nil)
+            if (UIImagePickerController.isSourceTypeAvailable(.camera)) {
+                picker.sourceType = .camera
+                picker.allowsEditing = true
+                self.present(picker, animated: true, completion: nil)
+            } else {
+                print("No camera")
+            }
         }
         let albumOption = UIAlertAction(title: "Photo Album", style: .default) { (alert: UIAlertAction) in
             picker.sourceType = .photoLibrary

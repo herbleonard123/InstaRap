@@ -16,6 +16,10 @@
 		5D64EC321EAC0B2500AD33EF /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D64EC311EAC0B2500AD33EF /* user.swift */; };
 		5DD47A091E9C7BB200D34244 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5DD47A081E9C7BB200D34244 /* GoogleService-Info.plist */; };
 		5DD706C51EBACD6F001BE5A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DD706C41EBACD6F001BE5A5 /* Assets.xcassets */; };
+		5DEC37921ECD42610099874D /* drake.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 5DEC37911ECD42610099874D /* drake.jpeg */; };
+		5DEC37941ECD441B0099874D /* drake_video.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 5DEC37931ECD441B0099874D /* drake_video.jpeg */; };
+		5DEC37961ECD45370099874D /* Willow_Smith.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 5DEC37951ECD45370099874D /* Willow_Smith.jpeg */; };
+		5DEC37981ECD46670099874D /* imwillowsmith.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 5DEC37971ECD46670099874D /* imwillowsmith.jpeg */; };
 		5DECF5C91EB19150001E9DF9 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DECF5C81EB19150001E9DF9 /* CustomTabBarController.swift */; };
 		A56203D41E933FEA00122BDB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56203D31E933FEA00122BDB /* AppDelegate.swift */; };
 		A56203D91E933FEA00122BDB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A56203D71E933FEA00122BDB /* Main.storyboard */; };
@@ -34,6 +38,10 @@
 		5D64EC311EAC0B2500AD33EF /* user.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = user.swift; path = ../user.swift; sourceTree = "<group>"; };
 		5DD47A081E9C7BB200D34244 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5DD706C41EBACD6F001BE5A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5DEC37911ECD42610099874D /* drake.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = drake.jpeg; sourceTree = "<group>"; };
+		5DEC37931ECD441B0099874D /* drake_video.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = drake_video.jpeg; sourceTree = "<group>"; };
+		5DEC37951ECD45370099874D /* Willow_Smith.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Willow_Smith.jpeg; sourceTree = "<group>"; };
+		5DEC37971ECD46670099874D /* imwillowsmith.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = imwillowsmith.jpeg; sourceTree = "<group>"; };
 		5DECF5C81EB19150001E9DF9 /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		834CA70B43AD134057AC81C1 /* Pods_Template.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Template.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A56203D01E933FEA00122BDB /* Template.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Template.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,6 +116,10 @@
 				A56203DF1E933FEA00122BDB /* Info.plist */,
 				5D64EC2F1EAC04C400AD33EF /* Post.swift */,
 				5D64EC311EAC0B2500AD33EF /* user.swift */,
+				5DEC37951ECD45370099874D /* Willow_Smith.jpeg */,
+				5DEC37911ECD42610099874D /* drake.jpeg */,
+				5DEC37971ECD46670099874D /* imwillowsmith.jpeg */,
+				5DEC37931ECD441B0099874D /* drake_video.jpeg */,
 			);
 			path = Template;
 			sourceTree = "<group>";
@@ -177,6 +189,10 @@
 				A56203DE1E933FEA00122BDB /* LaunchScreen.storyboard in Resources */,
 				5DD47A091E9C7BB200D34244 /* GoogleService-Info.plist in Resources */,
 				5DD706C51EBACD6F001BE5A5 /* Assets.xcassets in Resources */,
+				5DEC37981ECD46670099874D /* imwillowsmith.jpeg in Resources */,
+				5DEC37921ECD42610099874D /* drake.jpeg in Resources */,
+				5DEC37961ECD45370099874D /* Willow_Smith.jpeg in Resources */,
+				5DEC37941ECD441B0099874D /* drake_video.jpeg in Resources */,
 				A56203D91E933FEA00122BDB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

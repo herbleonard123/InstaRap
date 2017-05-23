@@ -4,6 +4,7 @@ target 'Template' do
     
     use_frameworks!
     
+    pod 'AlamofireImage', '~> 3.1'
     pod 'Firebase/Core'
     pod 'Firebase/Storage'
     pod 'Firebase/Database'

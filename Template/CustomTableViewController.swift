@@ -11,6 +11,8 @@ import UIKit
 import Firebase
 import AVFoundation
 import MobileCoreServices
+import Alamofire
+import AlamofireImage
 
 class CustomTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -18,17 +20,18 @@ class CustomTableViewController: UITableViewController, UIImagePickerControllerD
     var users = [User]()
     var videofileurl: NSURL?
     var thumbnailImage: UIImage?
+    let imageDownloader = ImageDownloader(configuration: ImageDownloader.defaultURLSessionConfiguration(), downloadPrioritization: .fifo, maximumActiveDownloads: 4, imageCache: AutoPurgingImageCache())
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        var user1 = User(id: "123", dictionary: ["name": "Drake", "email": "drake@gmail.com", "imageurl": "drake.jpeg"] as AnyObject)
+        /*var user1 = User(id: "123", dictionary: ["name": "Drake", "email": "drake@gmail.com", "imageurl": "drake.jpeg"] as AnyObject)
         users.append(user1)
         var post = Post(id: "123", dictionary: ["mics": 2, "imageurl": "drake.jpeg", "videourl": "drake_video.jpeg"] as AnyObject)
         posts.append(post)
         var user2 = User(id: "1234", dictionary: ["name": "Willow", "email": "willow@gmail.com", "imageurl": "imwillowsmith.jpeg"] as AnyObject)
         users.append(user2)
         var post2 = Post(id: "1234", dictionary: ["mics": 4, "imageurl": "imwillowsmith.jpeg", "videourl": "Willow_Smith.jpeg"] as AnyObject)
-        posts.append(post2)
+        posts.append(post2)*/
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -59,8 +62,16 @@ class CustomTableViewController: UITableViewController, UIImagePickerControllerD
         // Configure the cell...
         let post = posts[indexPath.row]
         // TODO: This code is incomplete. Need to set up the cell based on info from the post object. Could use AlamofireImage to download the image based on the image URL.
-        cell.profileImageView.image = UIImage(named: post.imageurl!)
-        cell.videoImageView.image = UIImage(named: post.videourl!)
+        if let imageurl = post.imageurl {
+            let urlRequest = URLRequest(url: URL(string: imageurl)!)
+                imageDownloader.download(urlRequest, completion: { (response: DataResponse<Image>) in
+                    if let image = response.result.value {
+                        
+                        cell.videoImageView.image = image
+                    }
+            })
+        }
+        // TODO: set profile image! cell.profileImageView.image = UIImage(named: post.imageurl!)
         var username = ""
         for user in users {
             if user.id == post.id {
@@ -120,7 +131,7 @@ class CustomTableViewController: UITableViewController, UIImagePickerControllerD
      @IBAction func onSignOutButton(_ sender: UIBarButtonItem) {
         do {
             
-            try FIRAuth.auth()?.signOut()
+            try Auth.auth().signOut()
         }
         catch let error {
             
@@ -160,20 +171,20 @@ class CustomTableViewController: UITableViewController, UIImagePickerControllerD
         if let videofileurl = info[UIImagePickerControllerMediaURL] as? NSURL {
             thumbnailImage = getThumbnailImage(forVideoFileUrl: videofileurl)
             if let currentUserId = User.currentUser?.id {
-                let rootNode = FIRDatabase.database().reference()
+                let rootNode = Database.database().reference()
                 let postNode = rootNode.child("posts").child(currentUserId).childByAutoId()
                 
-                let storageNode = FIRStorage.storage().reference()
+                let storageNode = Storage.storage().reference()
                 let postImageNode = storageNode.child("postImages").child("\(postNode.key).png")
                 if let imageData = UIImagePNGRepresentation(thumbnailImage!) {
                     // Save image.
-                    postImageNode.put(imageData, metadata: nil, completion: { (metadata: FIRStorageMetadata?, error: Error?) in
+                    postImageNode.putData(imageData, metadata: nil, completion: { (metadata: StorageMetadata?, error: Error?) in
                         
                         if error == nil {
                             let imageUrl = metadata?.downloadURL()
                             let postVideoNode = storageNode.child("postVideos").child("\(postNode.key).mov")
                             // Save video.
-                            postVideoNode.putFile(videofileurl as URL, metadata: nil, completion: { (metadata: FIRStorageMetadata?, error: Error?) in
+                            postVideoNode.putFile(from: videofileurl as URL, metadata: nil, completion: { (metadata: StorageMetadata?, error: Error?) in
                                 
                                 if error == nil {
                                     let videoUrl = metadata?.downloadURL()
@@ -183,9 +194,9 @@ class CustomTableViewController: UITableViewController, UIImagePickerControllerD
                                         "videourl": videoUrl?.absoluteString ?? "" as Any
                                     ]
                                     // Save post.
-                                    postNode.updateChildValues(values, withCompletionBlock: { (error: Error?, database: FIRDatabaseReference) in
+                                    postNode.updateChildValues(values, withCompletionBlock: { (error: Error?, database: DatabaseReference) in
                                         if error == nil {
-                                            postNode.observeSingleEvent(of: .value, with: { (snapshot: FIRDataSnapshot) in
+                                            postNode.observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
                                                 let postId = snapshot.key
                                                 let post = Post(id: postId, dictionary: snapshot.value as AnyObject)
                                                 self.posts.append(post)

@@ -9,12 +9,13 @@
 import Foundation
 class Post{
     var id : String?
-    // TODO: Need to save the user ID of the author of the post here.
+    var  userid: String?
     var mics: Int?
     var imageurl:String?
     var videourl:String?
     init(id:String,dictionary:AnyObject) {
         self.id = id
+        self.userid = dictionary.object(forKey:"userid")as? String
         self.mics = dictionary.object(forKey:"mics")as? Int
         self.imageurl = dictionary.object(forKey:"imageurl")as? String
         self.videourl = dictionary.object(forKey:"videourl")as? String

@@ -9,7 +9,7 @@
 import Foundation
 class Post{
     var id : String?
-    var  userid: String?
+    var userid: String?
     var mics: Int?
     var imageurl:String?
     var videourl:String?

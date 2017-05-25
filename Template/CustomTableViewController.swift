@@ -17,18 +17,18 @@ import AlamofireImage
 class CustomTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var posts = [Post]()
-    var users = [User]()
+    var users = [String: InstaUser]()
     var videofileurl: NSURL?
     var thumbnailImage: UIImage?
     let imageDownloader = ImageDownloader(configuration: ImageDownloader.defaultURLSessionConfiguration(), downloadPrioritization: .fifo, maximumActiveDownloads: 4, imageCache: AutoPurgingImageCache())
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        /*var user1 = User(id: "123", dictionary: ["name": "Drake", "email": "drake@gmail.com", "imageurl": "drake.jpeg"] as AnyObject)
+        /*var user1 = InstaUser(id: "123", dictionary: ["name": "Drake", "email": "drake@gmail.com", "imageurl": "drake.jpeg"] as AnyObject)
         users.append(user1)
         var post = Post(id: "123", dictionary: ["mics": 2, "imageurl": "drake.jpeg", "videourl": "drake_video.jpeg"] as AnyObject)
         posts.append(post)
-        var user2 = User(id: "1234", dictionary: ["name": "Willow", "email": "willow@gmail.com", "imageurl": "imwillowsmith.jpeg"] as AnyObject)
+        var user2 = InstaUser(id: "1234", dictionary: ["name": "Willow", "email": "willow@gmail.com", "imageurl": "imwillowsmith.jpeg"] as AnyObject)
         users.append(user2)
         var post2 = Post(id: "1234", dictionary: ["mics": 4, "imageurl": "imwillowsmith.jpeg", "videourl": "Willow_Smith.jpeg"] as AnyObject)
         posts.append(post2)*/
@@ -37,6 +37,28 @@ class CustomTableViewController: UITableViewController, UIImagePickerControllerD
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        let rootNode = Database.database().reference()
+        
+        // Observe users
+        let usersNode = rootNode.child("users")
+        usersNode.observe(.childAdded) { (snapshot: DataSnapshot) in
+            let userId = snapshot.key
+            let user = InstaUser(id: userId, dictionary: snapshot.value as AnyObject)
+            self.users[userId] = user
+        }
+
+        // Observe posts
+        let postsNode = rootNode.child("posts")
+        postsNode.observe(.childAdded) { (snapshot: DataSnapshot) in
+            let postId = snapshot.key
+            let post = Post(id: postId, dictionary: snapshot.value as AnyObject)
+            self.posts.append(post)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,7 +83,6 @@ class CustomTableViewController: UITableViewController, UIImagePickerControllerD
 
         // Configure the cell...
         let post = posts[indexPath.row]
-        // TODO: This code is incomplete. Need to set up the cell based on info from the post object. Could use AlamofireImage to download the image based on the image URL.
         if let imageurl = post.imageurl {
             let urlRequest = URLRequest(url: URL(string: imageurl)!)
                 imageDownloader.download(urlRequest, completion: { (response: DataResponse<Image>) in
@@ -71,14 +92,24 @@ class CustomTableViewController: UITableViewController, UIImagePickerControllerD
                     }
             })
         }
-        // TODO: set profile image! cell.profileImageView.image = UIImage(named: post.imageurl!)
-        var username = ""
-        for user in users {
-            if user.id == post.id {
-                username = user.name!
+
+        cell.profileImageView.image = nil
+        if let userid = post.userid, let user = users[userid] {
+            cell.usernameLabel.text = user.name
+
+            if let imageurl = user.imageurl {
+                let urlRequest = URLRequest(url: URL(string: imageurl)!)
+                imageDownloader.download(urlRequest, completion: { (response: DataResponse<Image>) in
+                    if let image = response.result.value {
+                        
+                        cell.profileImageView.image = image
+                    }
+                })
             }
         }
-        cell.usernameLabel.text = username
+        else {
+            cell.usernameLabel.text = nil
+        }
         cell.usernameLabel.adjustsFontSizeToFitWidth = true
         cell.micCountLabel.text = "\(post.mics!)"
 
@@ -170,9 +201,9 @@ class CustomTableViewController: UITableViewController, UIImagePickerControllerD
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let videofileurl = info[UIImagePickerControllerMediaURL] as? NSURL {
             thumbnailImage = getThumbnailImage(forVideoFileUrl: videofileurl)
-            if let currentUserId = User.currentUser?.id {
+            if let currentUserId = InstaUser.currentUser?.id {
                 let rootNode = Database.database().reference()
-                let postNode = rootNode.child("posts").child(currentUserId).childByAutoId()
+                let postNode = rootNode.child("posts").childByAutoId()
                 
                 let storageNode = Storage.storage().reference()
                 let postImageNode = storageNode.child("postImages").child("\(postNode.key).png")
@@ -189,19 +220,21 @@ class CustomTableViewController: UITableViewController, UIImagePickerControllerD
                                 if error == nil {
                                     let videoUrl = metadata?.downloadURL()
                                     let values = [
+                                        "userid": currentUserId as Any,
                                         "mics": 0 as Any,
                                         "imageurl": imageUrl?.absoluteString ?? "" as Any,
                                         "videourl": videoUrl?.absoluteString ?? "" as Any
                                     ]
                                     // Save post.
                                     postNode.updateChildValues(values, withCompletionBlock: { (error: Error?, database: DatabaseReference) in
-                                        if error == nil {
+                                        /* Do this by observing instead
+                                         if error == nil {
                                             postNode.observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
                                                 let postId = snapshot.key
                                                 let post = Post(id: postId, dictionary: snapshot.value as AnyObject)
                                                 self.posts.append(post)
                                             })
-                                        }
+                                        }*/
                                     })
                                 }
                             })
@@ -211,6 +244,7 @@ class CustomTableViewController: UITableViewController, UIImagePickerControllerD
                 }
             }
         }
+        dismiss(animated: true, completion: nil)
     }
     
     func getThumbnailImage(forVideoFileUrl videoFileUrl: NSURL) -> UIImage? {

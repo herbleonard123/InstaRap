@@ -7,7 +7,7 @@
 //
 
 import Foundation
-class User{
+class InstaUser {
     var id : String?
     var name: String?
     var email:String?
@@ -22,7 +22,7 @@ class User{
     }
     
     
-    static var currentUser: User?
+    static var currentUser: InstaUser?
     
 }
 

@@ -34,15 +34,15 @@ class CustomTabBarController: UITabBarController {
         let provider: [FUIAuthProvider] = [FUIGoogleAuth()]
         FUIAuth.defaultAuthUI()?.providers = provider
         // Listen for changes in the authorization state.
-        authHandle = Auth.auth().addStateDidChangeListener({ (auth: Auth, user: User?)  in
+        authHandle = Auth.auth().addStateDidChangeListener({ (auth, user) in
             
             // Check if there is a current user.
             if let activeUser = user {
                 
                 // add user to database if not there
-                let rootNode = FIRDatabase.database().reference()
+                let rootNode = Database.database().reference()
                 let usersNode = rootNode.child("users")
-                usersNode.observeSingleEvent(of: .value, with: { (snapshot:FIRDataSnapshot) in
+                usersNode.observeSingleEvent(of: .value, with: { (snapshot:DataSnapshot) in
                     if !snapshot.hasChild(activeUser.uid) {
                         
                         let userNode = usersNode.child(activeUser.uid)
@@ -50,14 +50,14 @@ class CustomTabBarController: UITabBarController {
                             "name": activeUser.displayName,
                             "email": activeUser.email,
                             "imageurl": activeUser.photoURL?.absoluteString]
-                        userNode.updateChildValues(values, withCompletionBlock: { (error: Error?, database: FIRDatabaseReference) in
+                        userNode.updateChildValues(values, withCompletionBlock: { (error: Error?, database: DatabaseReference) in
                             if let error = error {
                                 print(error)
                             }
                             else{
-                                userNode.observeSingleEvent(of: .value, with: { (snapshot: FIRDataSnapshot) in
+                                userNode.observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
                                     let userid = snapshot.key
-                                    User.currentUser = User(id: userid, dictionary: snapshot.value as AnyObject)
+                                    InstaUser.currentUser = InstaUser(id: userid, dictionary: snapshot.value as AnyObject)
                                 })
                             }
                         })
@@ -67,7 +67,6 @@ class CustomTabBarController: UITabBarController {
                 
                 // check if the current app user is the current FIRUser.
                 if self.user != activeUser {
-                    
                     self.user = activeUser
                 }
             }

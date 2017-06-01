@@ -63,6 +63,13 @@ class CustomTabBarController: UITabBarController {
                         })
                         
                     }
+                    else {
+                        let userNode = usersNode.child(activeUser.uid)
+                        userNode.observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
+                            let userid = snapshot.key
+                            InstaUser.currentUser = InstaUser(id: userid, dictionary: snapshot.value as AnyObject)
+                        })
+                    }
                 })
                 
                 // check if the current app user is the current FIRUser.

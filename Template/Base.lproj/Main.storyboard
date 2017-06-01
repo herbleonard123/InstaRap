@@ -114,6 +114,9 @@
                                             <rect key="frame" x="252" y="30" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" image="Play"/>
+                                            <connections>
+                                                <action selector="onPlayButton:" destination="pCm-ny-1YB" eventType="touchUpInside" id="w08-z0-mf2"/>
+                                            </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Drake" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IPW-Fb-tUC">
                                             <rect key="frame" x="11" y="59" width="45" height="21"/>
@@ -159,7 +162,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gZJ-t8-hE8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="191" y="641"/>
+            <point key="canvasLocation" x="189.59999999999999" y="640.92953523238384"/>
         </scene>
         <!--Map View-->
         <scene sceneID="zyU-p4-qck">

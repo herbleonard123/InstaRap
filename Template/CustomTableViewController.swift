@@ -13,6 +13,7 @@ import AVFoundation
 import MobileCoreServices
 import Alamofire
 import AlamofireImage
+import AVKit
 
 class CustomTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -112,6 +113,8 @@ class CustomTableViewController: UITableViewController, UIImagePickerControllerD
         }
         cell.usernameLabel.adjustsFontSizeToFitWidth = true
         cell.micCountLabel.text = "\(post.mics!)"
+        cell.videourl = post.videourl
+        cell.delegate = self
 
         return cell
     }
@@ -227,14 +230,14 @@ class CustomTableViewController: UITableViewController, UIImagePickerControllerD
                                     ]
                                     // Save post.
                                     postNode.updateChildValues(values, withCompletionBlock: { (error: Error?, database: DatabaseReference) in
-                                        /* Do this by observing instead
+                                         // Do this by observing instead?
                                          if error == nil {
                                             postNode.observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
                                                 let postId = snapshot.key
                                                 let post = Post(id: postId, dictionary: snapshot.value as AnyObject)
                                                 self.posts.append(post)
                                             })
-                                        }*/
+                                        }
                                     })
                                 }
                             })
@@ -257,6 +260,18 @@ class CustomTableViewController: UITableViewController, UIImagePickerControllerD
         }
         catch {
             return UIImage()
+        }
+    }    
+}
+
+extension CustomTableViewController: CustomTableViewCellDelegate {
+    
+    func cellPlayVideo(forVideoUrl videoUrl: URL) {
+        
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = AVPlayer(url: videoUrl)
+        present(playerViewController, animated: true){
+            playerViewController.player!.play()
         }
     }
 }

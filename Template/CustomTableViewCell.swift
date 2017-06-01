@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol CustomTableViewCellDelegate: class {
+    
+    func cellPlayVideo(forVideoUrl videoUrl: URL)
+}
+
 class CustomTableViewCell: UITableViewCell {
 
     @IBOutlet weak var profileImageView: UIImageView!
@@ -18,6 +23,10 @@ class CustomTableViewCell: UITableViewCell {
     @IBOutlet weak var micCountLabel: UILabel!
     @IBOutlet weak var videoImageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
+    
+    weak var delegate: CustomTableViewCellDelegate?
+    var videourl: String?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -29,4 +38,11 @@ class CustomTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func onPlayButton(_ sender: UIButton) {
+        
+        if let delegate = delegate, let videourlString = videourl, let videoUrl = URL(string: videourlString) {
+            
+            delegate.cellPlayVideo(forVideoUrl: videoUrl)
+        }
+    }
 }
